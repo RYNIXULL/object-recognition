@@ -1,0 +1,38 @@
+version: "3.8"
+
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: pointer-backend
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./data:/app/data
+    env_file:
+      - .env
+    environment:
+      # Override the sqlite and chroma paths to match the volume mount
+      - SQLITE_PATH=./data/sqlite/app.db
+      - CHROMA_PATH=./data/chroma
+      - FACES_DB_PATH=./data/sqlite/faces.db
+      - PERSONAS_DIR=./data/personas
+      - KB_DIR=./data/knowledge_base
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: pointer-frontend
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      # Tell frontend to connect to the backend through the browser.
+      # This needs to be the public URL if deploying to VPS (e.g. wss://api.domain.com/ws)
+      # For local testing, we fallback to localhost
+      - NEXT_PUBLIC_WS_URL=ws://127.0.0.1:8000/ws
+    depends_on:
+      - backend

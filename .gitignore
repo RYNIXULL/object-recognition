@@ -1,0 +1,70 @@
+# Secrets
+.env
+.env.*
+!.env.example
+credentials.json
+service-account.json
+*.pem
+*.key
+*.p12
+*.pfx
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+backend/.venv/
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+
+# Node / Build artifacts
+node_modules/
+dist/
+build/
+.next/
+frontend/.next/
+frontend/out/
+coverage/
+.cache/
+.vite/
+.turbo/
+
+# Local data (runtime artifacts, not committed)
+data/sqlite/*.db
+data/chroma/
+data/knowledge_base/*
+!data/knowledge_base/.gitkeep
+*.sql
+
+# Avatars (large binary, dev only)
+frontend/public/avatars/*.vrm
+
+# Smoke-test artifacts
+scripts/_out/
+
+# Log files
+*.log
+*.err.log
+logs/
+
+# Azure / deployment exports / misc artifacts
+*.csv
+Penyebaran-*/
+deployment_operations.json
+penyebaran.json
+nul
+
+# AI coding assistant local config (not for version control)
+.claude/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+
+# OS
+Thumbs.db
+.DS_Store
